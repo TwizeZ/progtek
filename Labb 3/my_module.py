@@ -1,4 +1,5 @@
 from text_encryption_function import encrypt    # Importerar funktionen encrypt från text_encryption_function.py
+import json                                     # Importerar modulen json
 
 # Uppgift 1
 
@@ -87,39 +88,31 @@ def get_list_handle_exceptions():
             with open(filename, "r", encoding="utf8") as f:
                 for item in f:
                     question_list = item.strip().split(";")
+                    if len(question_list) != 4:
+                        raise ValueError("Invalid file format. Make sure each line contains a question and three answer options separated by semicolons.")
                     short_quiz_list_of_lists.append(question_list)
             status = False
         except FileNotFoundError:
             print("File not found. Please try again.")
+        except ValueError as err:
+            print(err)
     return short_quiz_list_of_lists
-
-# def get_list_handle_exceptions1():
-#     status = True
-#     while status:
-#         filename = input("Name of quiz-file: ")
-#         try:
-#             short_quiz_list_of_lists = []
-#             file1 = open(filename, "r", encoding="utf8")
-#             for item in file1:
-#                 question_list = item.strip().split(";")
-#                 short_quiz_list_of_lists.append(question_list)
-#             file1.close()
-#             status = False
-#         except FileNotFoundError:
-#             print("File not found. Please try again.")
-#     print(short_quiz_list_of_lists)
-
-
-            
-
 
 # ----------------------------------------------------------
 
+if __name__ == "__main__":
+    # copy_text_file('namn.csv', 'my_copy.csv')
+    # encrypt_file('namn.csv', 'secret_names.csv')
+    # user_dialogue()
+    # get_int_input("Enter a number: ")
 
-# copy_text_file('namn.csv', 'my_copy.csv')
-# encrypt_file('namn.csv', 'secret_names.csv')
-# user_dialogue()
-# get_int_input("Enter a number: ")
+    # run_quiz(short_quiz_list_of_lists)
+    # print(get_list_handle_exceptions())
 
-# run_quiz(short_quiz_list_of_lists)
-print(get_list_handle_exceptions())
+    # run_quiz(get_list_handle_exceptions())
+    
+    # NOTE Uppgift 8:
+    ql = get_list_handle_exceptions()
+    json_string = json.dumps(ql, indent=2)
+    with open("quiz.json", "w", encoding="utf8") as fo:
+        fo.write(json_string)
