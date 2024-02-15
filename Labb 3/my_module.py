@@ -80,23 +80,23 @@ def run_quiz(quiz_list_of_lists):
 # Uppgift 6
     
 def get_list_handle_exceptions():
-    status = True
-    while status:
-        filename = input("Name of quiz-file: ")
+    status = True                                                   # Variabel som håller koll på om användaren har skrivit in ett korrekt filnamn
+    while status:                                                   # Loopar så länge användaren inte har skrivit in ett korrekt filnamn
+        filename = input("Name of quiz-file: ")                     # Input för att ange quiz-filens namn
         try:
-            short_quiz_list_of_lists = []
-            with open(filename, "r", encoding="utf8") as f:
-                for item in f:
-                    question_list = item.strip().split(";")
-                    if len(question_list) != 4:
+            short_quiz_list_of_lists = []                           # Skapar en tom lista som ska fyllas med frågor och svarsalternativ
+            with open(filename, "r", encoding="utf8") as f:         # Öppnar filen som angivits
+                for item in f:                                      # Loopar igenom varje rad i filen
+                    question_list = item.strip().split(";")         # Delar upp varje rad i en lista med 4 parametrar (fråga och tre svarsalternativ)
+                    if len(question_list) != 4:                     # Om en rad inte innehåller 4 parametrar så fångas felet och användaren får försöka igen
                         raise ValueError("Invalid file format. Make sure each line contains a question and three answer options separated by semicolons.")
-                    short_quiz_list_of_lists.append(question_list)
-            status = False
-        except FileNotFoundError:
+                    short_quiz_list_of_lists.append(question_list)  # Om raden innehåller 4 parametrar så läggs den till i listan short_quiz_list_of_lists
+            status = False                                          
+        except FileNotFoundError:                                   # Om filen inte hittas så fångas felet och användaren får försöka igen
             print("File not found. Please try again.")
-        except ValueError as err:
+        except ValueError as err:                                   # Om en rad inte innehåller 4 parametrar så fångas felet här och användaren får försöka igen
             print(err)
-    return short_quiz_list_of_lists
+    return short_quiz_list_of_lists                                 # Returnerar listan short_quiz_list_of_lists
 
 # ----------------------------------------------------------
 
