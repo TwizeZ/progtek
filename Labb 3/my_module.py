@@ -113,6 +113,6 @@ if __name__ == "__main__":
     
     # NOTE Uppgift 8:
     ql = get_list_handle_exceptions()
-    json_string = json.dumps(ql, indent=2)
+    json_string = json.dumps(ql, indent=2, ensure_ascii=False)
     with open("quiz.json", "w", encoding="utf8") as fo:
         fo.write(json_string)
