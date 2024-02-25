@@ -94,9 +94,6 @@ def menu_choice():
             print("Invalid choice. Please try again.")
 
 def execute(choice):
-    # felix = Account("Felix", 1000, 1234)
-    # account_dict[felix.name] = felix
-
     loop = True
     while loop:
         if choice == 1:
@@ -136,7 +133,8 @@ def execute(choice):
         elif choice == 6:
             loop = False
 
-
+def main():
+    execute(menu_choice())
 
 if __name__ == "__main__":
-    execute(menu_choice())
+    main()
