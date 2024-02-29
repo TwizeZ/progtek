@@ -1,4 +1,5 @@
 account_dict = {}
+account_file = "/Users/felix/Documents/University/Prog/progtek/Labb 4/accounts.csv"
 
 class Account():
     def __init__(self, name, money, pin_code):
@@ -8,7 +9,7 @@ class Account():
         self.transactions = []
     
     def __str__(self):
-        return f"\nAccount details:\nName: {self.name}\nBalance: {self.money}\nTransactions: {self.transactions}"
+        return f"\nAccount details\nName: {self.name}\nBalance: {self.money}\nTransactions: {self.transactions}"
     
     def deposit(self, amount):
         self.money += amount
@@ -54,9 +55,10 @@ def read_accounts_from_file(file_name):
         return accounts
 
 def write_accounts_to_file(accounts, file_name):
-    with open(file_name, "w", encoding="utf8") as f:
+    with open(file_name, "a", encoding="utf8") as f:
         for account in accounts:
-            f.write(f"{account.name};{account.money};{account.pin_code};{account.transactions}\n")
+            find = account_dict[account]
+            f.write(f"{find.name};{find.money};{find.pin_code};{find.transactions};\n")
 
 def get_int_input(prompt_string):
     status = True
@@ -94,6 +96,8 @@ def menu_choice():
             print("Invalid choice. Please try again.")
 
 def execute(choice):
+    read_accounts_from_file(account_file)
+
     loop = True
     while loop:
         if choice == 1:
@@ -132,6 +136,10 @@ def execute(choice):
                 print("Account was not found. Please try again.")
         elif choice == 6:
             loop = False
+        
+        account_dict["Lisa"] = Account("Lisa", 200, 1111)
+
+        write_accounts_to_file(account_dict, account_file)
 
 def main():
     execute(menu_choice())
