@@ -21,7 +21,7 @@ class Account():
             return "Invalid PIN code. Withdrawal failed."
         else:        
             self.money -= amount
-            self.transactions.append({"type": "withdrawal", "amount": amount})
+            self.transactions.append({"type": "withdrawal", "amount": -amount})
             return f"Withdrawal was successful. New balance: {self.money}."
 
     def ok_PIN(self, pin):
@@ -39,7 +39,7 @@ class Account():
     
 class PremiumAccount(Account):
     def withdrawal(self, amount, pin):
-        if self.amount <= self.money:
+        if amount <= self.money:
             return super().withdrawal(amount, pin)
         else:
             return "Withdrawal failed due to insufficient funds. Would you like to take a loan?"
@@ -105,41 +105,36 @@ def execute(choice):
             pin = get_int_input("Create a PIN-code: ")
             money = get_int_input("Enter the amount of money you want to deposit: ")
             account_dict[name] = Account(name, money, pin)
-            loop = False
         elif choice == 2:
             acc_name = input("Enter your account name: ")
             try:
                 print(account_dict[acc_name].deposit(get_int_input("Enter the amount of money you want to deposit: ")))
-                loop = False
             except AttributeError and KeyError:
                 print("Account was not found. Please try again.")
         elif choice == 3:
             acc_name = input("Enter your account name: ")
             try:
                 print(account_dict[acc_name].withdrawal(get_int_input("Enter the amount of money you want to withdrawal: "), get_int_input("Enter your PIN-code: ")))
-                loop = False
             except AttributeError and KeyError:
                 print("Account was not found. Please try again.")
         elif choice == 4:
             acc_name = input("Enter your account name: ")
             try:
                 print(account_dict[acc_name].change_PIN(get_int_input("Enter your old PIN: "), get_int_input("Enter your new PIN: ")))
-                loop = False
             except AttributeError and KeyError:
                 print("Account was not found. Please try again.")
         elif choice == 5:
             acc_name = input("Enter your account name: ")
             try:
                 print(account_dict[acc_name].transactions)
-                loop = False
             except AttributeError and KeyError:
                 print("Account was not found. Please try again.")
         elif choice == 6:
             loop = False
         
-        account_dict["Lisa"] = Account("Lisa", 200, 1111)
-
-        write_accounts_to_file(account_dict, account_file)
+        choice = menu_choice()
+    
+    write_accounts_to_file(account_dict, account_file)
 
 def main():
     execute(menu_choice())
