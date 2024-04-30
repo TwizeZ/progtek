@@ -438,9 +438,11 @@ print(f"Stockholm - Göteborg: {price_2(455)*0.07} SEK\n")
 
 # c
 
-def read_data(file_name):
+nutrients_dict = {}
+behov_dict = {}
+
+def read_nutrients(file_name):
     with open(file_name, "r", encoding="utf8") as file:
-        data_dict = {}
         for i, line in enumerate(file):
             if line == "\n" or line == "":
                 break
@@ -451,20 +453,42 @@ def read_data(file_name):
             elements = line.split()
             for item in elements:
                 item.replace(" ", "")
-                if item == "":
-                    elements.remove(item)
             
-            data_dict[elements[0]] = {"protein":elements[1],
+            nutrients_dict[elements[0]] = {"protein":elements[1],
                                       "carbonhydrates":elements[2],
                                       "fat":elements[3],
                                       "A":elements[4],
                                       "B1":elements[5],
                                       "B2":elements[6],
                                       "B3":elements[7],
-                                      "B12":elements[8],"C":elements[9],
-                                      "D":elements[10],"K":elements[11],
+                                      "B12":elements[8],
+                                      "C":elements[9],
+                                      "D":elements[10],
+                                      "K":elements[11],
                                       "energy":elements[12],
                                       "price":elements[13]}
-        return data_dict
+        return nutrients_dict
 
-print(read_data("nutrients.text"))
+
+def read_behov(file_name):
+    with open(file_name, "r", encoding="utf8") as file:
+        line = file.readlines()[-1]
+        elements = line.split()
+        
+        behov_dict[elements[0]] = {"protein":elements[1],
+                                    "carbonhydrates":elements[2],
+                                    "fat":elements[3],
+                                    "A":elements[4],
+                                    "B1":elements[5],
+                                    "B2":elements[6],
+                                    "B3":elements[7],
+                                    "B12":elements[8],
+                                    "C":elements[9],
+                                    "D":elements[10],
+                                    "K":elements[11],
+                                    }
+        return behov_dict
+
+
+print(read_nutrients("nutrients.text"))
+print(read_behov("Naringsbehov.text"))
