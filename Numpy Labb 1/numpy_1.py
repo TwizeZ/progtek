@@ -430,18 +430,15 @@ plt.plot(x, m*x + c, 'r', label='Fitted line')
 plt.legend()
 plt.show()
 
-# c
-
 def price_2(x):
     return m*x + c
 
 print(f"\nSendai - Tokyta: {price_2(325.4)} JPY")
 print(f"Stockholm - Göteborg: {price_2(455)*0.07} SEK\n")
 
-# c = np.array()
+# c
 
 def read_data(file_name):
-    # sp.optimize.linprog()
     with open(file_name, "r", encoding="utf8") as file:
         data_dict = {}
         for i, line in enumerate(file):
