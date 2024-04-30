@@ -454,19 +454,19 @@ def read_nutrients(file_name):
             for item in elements:
                 item.replace(" ", "")
             
-            nutrients_dict[elements[0]] = {"protein":elements[1],
-                                      "carbonhydrates":elements[2],
-                                      "fat":elements[3],
-                                      "A":elements[4],
-                                      "B1":elements[5],
-                                      "B2":elements[6],
-                                      "B3":elements[7],
-                                      "B12":elements[8],
-                                      "C":elements[9],
-                                      "D":elements[10],
-                                      "K":elements[11],
-                                      "energy":elements[12],
-                                      "price":elements[13]}
+            nutrients_dict[elements[0]] = {"protein":float(elements[1]),
+                                      "carbonhydrates":float(elements[2]),
+                                      "fat":float(elements[3]),
+                                      "A":float(elements[4]),
+                                      "B1":float(elements[5]),
+                                      "B2":float(elements[6]),
+                                      "B3":float(elements[7]),
+                                      "B12":float(elements[8]),
+                                      "C":float(elements[9]),
+                                      "D":float(elements[10]),
+                                      "K":float(elements[11]),
+                                      "energy":float(elements[12]),
+                                      "price":float(elements[13])}
         return nutrients_dict
 
 
@@ -474,10 +474,18 @@ def read_behov(file_name):
     with open(file_name, "r", encoding="utf8") as file:
         line = file.readlines()[-1]
         elements = line.split()
-        behov_list = elements        
+        for item in elements:
+            behov_list.append(float(item[:-1]))
         
         return behov_list
 
 
-print(read_nutrients("nutrients.text"))
-print(read_behov("Naringsbehov.text"))
+behov = read_behov("Naringsbehov.text")
+nutrients = read_nutrients("nutrients.text")
+
+for _, value in nutrients.items():
+    for prop in value:
+        print(prop[-1])
+
+# c = array
+read_nutrients("nutrients.text")
