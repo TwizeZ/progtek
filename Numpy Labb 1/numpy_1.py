@@ -439,7 +439,7 @@ print(f"Stockholm - Göteborg: {price_2(455)*0.07} SEK\n")
 # c
 
 nutrients_dict = {}
-behov_dict = {}
+behov_list = []
 
 def read_nutrients(file_name):
     with open(file_name, "r", encoding="utf8") as file:
@@ -474,20 +474,9 @@ def read_behov(file_name):
     with open(file_name, "r", encoding="utf8") as file:
         line = file.readlines()[-1]
         elements = line.split()
+        behov_list = elements        
         
-        behov_dict[elements[0]] = {"protein":elements[1],
-                                    "carbonhydrates":elements[2],
-                                    "fat":elements[3],
-                                    "A":elements[4],
-                                    "B1":elements[5],
-                                    "B2":elements[6],
-                                    "B3":elements[7],
-                                    "B12":elements[8],
-                                    "C":elements[9],
-                                    "D":elements[10],
-                                    "K":elements[11],
-                                    }
-        return behov_dict
+        return behov_list
 
 
 print(read_nutrients("nutrients.text"))
