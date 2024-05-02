@@ -102,14 +102,17 @@ def spiral():
     ax = fig.add_subplot(projection='3d')
 
     # Prepare arrays x, y, z
-    theta = np.linspace(-4 * np.pi, 4 * np.pi, 100)
+    theta1 = np.linspace(-4 * np.pi, 4 * np.pi, 100)
+    theta2 = np.linspace(-4 * np.pi + np.pi, 4 * np.pi + np.pi, 100)
     z = np.linspace(-2, 2, 100)
     r = 1
-    x = r * np.sin(theta)
-    y = r * np.cos(theta)
+    x1 = r * np.sin(theta1)
+    y1 = r * np.cos(theta1)
+    x2 = r * np.sin(theta2)
+    y2 = r * np.cos(theta2)
 
-    ax.plot(x, y, z, label='parametric curve')
-    ax.plot(y, x, z, label='parametric curve')
+    ax.plot(x1, y1, z, label='parametric curve')
+    ax.plot(x2, y2, z, label='parametric curve')
     ax.legend()
 
     plt.show()

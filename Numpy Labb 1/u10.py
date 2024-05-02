@@ -140,7 +140,6 @@ b_ub = -1 * np.array(behov)
 b_eq = np.array([8710])
 
 result = sp.optimize.linprog(c=cost, A_ub=A_ub, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, method='highs', bounds=[0, None], options={"primal_feasibility_tolerance": 1e-10})
-print(result)
 
 tot_cost = 0
 for food in range(len(foods)):
