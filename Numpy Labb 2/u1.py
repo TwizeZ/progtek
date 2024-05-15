@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy as sp
-import math
 
 
 # a
@@ -36,8 +35,8 @@ plt.show()
 
 N = np.zeros((401, 401))
 
-for i, a in enumerate(np.arange(-0.7, -0.3, 0.001)):
-    for k, b in enumerate(np.arange(-0.2, 0.2, 0.001)):
+for i, a in enumerate(np.arange(-1, -0.6, 0.001)):
+    for k, b in enumerate(np.arange(0, 0.4, 0.001)):
         result = mandelbrot(a+b*1j)
         if result:
             N[i, k] = 1
